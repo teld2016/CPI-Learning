@@ -1,4 +1,6 @@
+https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/0993f2aa14124376a4adc7c5ba95d3f8.html
 
+https://help.sap.com/viewer/p/CLOUD_INTEGRATION?q=JMS
 
 https://blogs.sap.com/2017/06/19/cloud-integration-configure-asynchronous-messaging-with-retry-using-jms-adapter/
 
@@ -19,6 +21,9 @@ Configure the JMS Sender Channel
 Create the integration flow with the outbound channel required by your scenario, and use the JMS adapter as the inbound adapter. You only have to configure the Queue Name for the JMS queue that you want to poll the messages from. Use the same queue name used in the receiving integration flow.
 
 Number of Concurrent Processes is set to 1 per default and should only be increased if more parallel processing is needed. Because the JMS resources are limited, you need to keep the number of parallel processes as low as possible. Especially if large messages are processed in the scenario, increasing the parallelism may lead to out of memory problems.
+
+Number of Concurrent Processes	
+Enter the number of concurrent processes for each worker node. The recommended value depends on the number of worker nodes, the number of queues on the tenant, and the incoming load. The value should be as small as possible (1-5).
 
 In the JMS sender channel you also have to configure the retry handling. Set the Retry Interval as required for your scenario (, the default value is 1 minute). We also recommend using Exponential Backoff, which means that the retry interval is doubled after each unsuccessful retry. By using this setting you can avoid calling the receiver backend every minute if it is unavailable for a longer time period. The Maximum Retry Interval defines the maximum time between two retries if exponential backoff is used. The recommendation is to either keep the 60 minutes or even increase it if this is acceptable by the scenario.
 
