@@ -34,3 +34,7 @@ Performance Impact of the Configuration
 The Dead-Letter Queue handling is a performance intensive operation, so you should expect a significant impact on the performance. This impact is even higher if you run high-load scenarios. This is because the Dead-Letter Queue handling is based on the database and the database does not scale as good as JMS.
 
 For high-load scenarios or if you are sure that only small messages will be processed in your scenario, you should deselect the checkbox to improve the performance, but do keep the risk of an outage in mind. The recommended configuration would be to configure the size check in the used sender adapter and with this configuration reject large messages to avoid that a large message can cause an out-of-memory. Unfortunately not all sender adapters support the size check yet.
+
+If you configure exponential backoff the retry is not done so frequently anymore after some retries. But there is no option to stop the consumption for some specified time.
+
+You could move the messages into another queue and trigger this via deployment of an integration flow consuming from this second queue.
